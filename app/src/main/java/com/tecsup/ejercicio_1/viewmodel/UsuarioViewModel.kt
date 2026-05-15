@@ -21,7 +21,7 @@ class UsuarioViewModel(private val usuarioDao: UsuarioDao) : ViewModel() {
 
     fun login(nombreUsuario: String, password: String, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            val usuario = usuarioDao.login(nombreUsuario, password)
+            val usuario = usuarioDao.buscarPorCredenciales(nombreUsuario, password)
             _usuarioLogueado.value = usuario
             onResult(usuario != null)
         }
@@ -32,7 +32,6 @@ class UsuarioViewModel(private val usuarioDao: UsuarioDao) : ViewModel() {
     }
 
     suspend fun existeUsuarioOEmail(nombreUsuario: String, email: String): Boolean {
-        val u = usuarioDao.login(nombreUsuario, "") // Simplificado para este ejemplo
         val e = usuarioDao.buscarPorEmail(email)
         return e != null
     }

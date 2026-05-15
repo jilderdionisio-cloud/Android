@@ -17,7 +17,7 @@ interface UsuarioDao {
         AND password = :password
         LIMIT 1
     """)
-    suspend fun login(
+    suspend fun buscarPorCredenciales(
         usuario: String,
         password: String
     ): Usuario?
