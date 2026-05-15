@@ -39,4 +39,10 @@ interface RutinaDao {
         WHERE usuario_id = :id
     """)
     suspend fun contarRutinas(id: Int): Int
+
+    @Query("""
+        SELECT SUM(peso_kg * series * repeticiones) FROM rutinas
+        WHERE usuario_id = :id
+    """)
+    suspend fun volumenTotal(id: Int): Double?
 }
